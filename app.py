@@ -44,14 +44,14 @@ print(f"Crear Clase '{CLASS_NAME}'.")
 client.command(f"CREATE CLASS {CLASS_NAME}")
 
 print("Insertar elementos en Clase creada.")
-client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpine"')
 client.command(f'INSERT INTO {CLASS_NAME} SET item="OrientDB", version="3.0"')
 client.command(f'INSERT INTO {CLASS_NAME} SET item="pyorient", version="1.5.1"')
 
 print("Insertar elementos que sigan estructura distinta.")
-client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpine"')
-client.command(f'INSERT INTO {CLASS_NAME} SET item="OrientDB", version="3.0"')
-client.command(f'INSERT INTO {CLASS_NAME} SET item="pyorient", version="1.5.1"')
+client.command(f'INSERT INTO {CLASS_NAME} SET lenguaje="java", usado=False')
+client.command(
+    f'INSERT INTO {CLASS_NAME} SET lenguaje="python", usado=True, version="3.11-alpine"'
+)
 
 # Cerrar la conexion
 # client.shutdown(DB_USER, DB_PWD)
