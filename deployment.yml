@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      componente: mi-web
+
+  template:
+    metadata:
+      labels:
+        componente: mi-web
+
+    spec:
+      containers:
+        - name: mi-otro-pod
+          image: httpd
+          ports:
+          - containerPort: 80
