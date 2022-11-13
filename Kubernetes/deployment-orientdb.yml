@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: deployment-orientdb
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      componente: orientdb
+
+  template:
+    metadata:
+      labels:
+        componente: orientdb
+
+      spec:
+        containers:
+          - name: contenedor-orientdb
+            image: orientdb:3.0

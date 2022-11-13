@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: deployment-cliente
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      componente: cliente
+
+  template:
+    metadata:
+      labels:
+        componente: cliente
+
+      spec:
+        containers:
+          - name: contenedor-cliente
+            image: jgarcia423/python-orientdb-client
