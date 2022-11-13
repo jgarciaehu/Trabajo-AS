@@ -1,12 +1,9 @@
 import pyorient
 
-# https://github.com/mogui/pyorient/issues/270
 HOST = "orientdb"
 PORT = 2424
 DATABASE_NAME = "pythonDB"
-
-# !!! Pendiente crear otro usuario
-DB_USER = "root"
+DB_USER = "root"  # !!! Pendiente crear otro usuario
 DB_PWD = "root_passwd"
 
 try:
@@ -38,6 +35,7 @@ else:
 
         print(f"!!! Error al crear la BD: {err}")
         exit
+
 
 CLASS_NAME = "ejemplo"
 print(f"Crear Clase '{CLASS_NAME}'.")
