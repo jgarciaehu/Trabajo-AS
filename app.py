@@ -1,4 +1,6 @@
 import pyorient
+from datetime import datetime
+import os
 
 HOST = "orientdb"
 PORT = 2424
@@ -50,6 +52,13 @@ client.command(f'INSERT INTO {CLASS_NAME} SET lenguaje="java", usado=False')
 client.command(
     f'INSERT INTO {CLASS_NAME} SET lenguaje="python", usado=True, version="3.11-alpine"'
 )
+
+print(f'Exportando una copia de la base de datos "{DATABASE_NAME}"')
+path = f"/files/export/{DATABASE_NAME}"
+if not os.path.exists(path):
+    os.makedirs(path)
+fechaHora = datetime.now().strftime("%d-%m_%H:%M")
+client.command(f"EXPORT DATABASE /files/export/{DATABASE_NAME}/{fechaHora}.export")
 
 # Cerrar la conexion
 # client.shutdown(DB_USER, DB_PWD)
