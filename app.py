@@ -1,6 +1,5 @@
 import pyorient
 from datetime import datetime
-import os
 
 HOST = "orientdb"
 PORT = 2424
@@ -39,26 +38,23 @@ else:
         exit
 
 
-CLASS_NAME = "ejemplo"
+CLASS_NAME = "miClase"
 print(f"Crear Clase '{CLASS_NAME}'.")
 client.command(f"CREATE CLASS {CLASS_NAME}")
 
 print("Insertar elementos en Clase creada.")
 client.command(f'INSERT INTO {CLASS_NAME} SET item="OrientDB", version="3.0"')
 client.command(f'INSERT INTO {CLASS_NAME} SET item="pyorient", version="1.5.1"')
+client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpine"')
 
-print("Insertar elementos que sigan estructura distinta.")
-client.command(f'INSERT INTO {CLASS_NAME} SET lenguaje="java", usado=False')
-client.command(
-    f'INSERT INTO {CLASS_NAME} SET lenguaje="python", usado=True, version="3.11-alpine"'
-)
+print("Exportar los elementos insertados a la BD.")
+list_miClase = client.command(f"SELECT * FROM {CLASS_NAME}")
+fecha = datetime.now().strftime("%d-%m")
 
-print(f'Exportando una copia de la base de datos "{DATABASE_NAME}"')
-path = f"/files/export/{DATABASE_NAME}"
-if not os.path.exists(path):
-    os.makedirs(path)
-fechaHora = datetime.now().strftime("%d-%m_%H:%M")
-client.command(f"EXPORT DATABASE /files/export/{DATABASE_NAME}/{fechaHora}.export")
+with open(f"/files/export-orientdb/export.txt", "w") as f:
+
+    for entrada in list_miClase:
+        f.write(f"Item: {entrada.item}, versión: {entrada.version}\n")
 
 # Cerrar la conexion
 # client.shutdown(DB_USER, DB_PWD)

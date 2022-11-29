@@ -1,15 +1,17 @@
 services:
   client:
-    # image: jgarcia423/python-orientdb-client
+    #image: jgarcia423/python-orientdb-client
     build: .
+    container_name: client
+    volumes:
+      - ./compartida:/files/export-orientdb
     depends_on:
       orientdb:
         condition: service_healthy
-    volumes:
-      - export-orientdb:/files/export
 
   orientdb:
     image: orientdb:3.0
+    container_name: orientdb
     environment:
       - ORIENTDB_ROOT_PASSWORD=root_passwd
     ports:
@@ -21,6 +23,16 @@ services:
       start_period: 5s
       timeout: 10s
 
+  apache:
+    image: httpd:2.4-alpine
+    container_name: apache
+    ports:
+      - 80:80
+    volumes:
+      - ./compartida:/usr/local/apache2/htdocs
+    depends_on:
+      orientdb:
+        condition: service_healthy
+
 volumes:
-  export-orientdb:
-    external: true
+  compartida:

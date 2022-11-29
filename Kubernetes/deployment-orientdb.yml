@@ -19,3 +19,5 @@ spec:
         containers:
           - name: contenedor-orientdb
             image: orientdb:3.0
+            ports:
+              - containerPort: 2424
