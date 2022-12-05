@@ -17,6 +17,7 @@ try:
 
 except:
     print("!!! Conexión a la BD fallida.")
+    exit
 
 
 if client.db_exists(DATABASE_NAME, pyorient.STORAGE_TYPE_MEMORY):
