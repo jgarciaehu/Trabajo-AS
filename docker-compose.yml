@@ -1,14 +1,4 @@
 services:
-  cliente:
-    # image: jgarcia423/python-orientdb-client
-    build: .
-    container_name: cliente
-    volumes:
-      - ./compartida:/files/export-orientdb
-    depends_on:
-      orientdb:
-        condition: service_healthy
-
   orientdb:
     image: orientdb:3.0
     container_name: orientdb
@@ -22,6 +12,16 @@ services:
       retries: 5
       start_period: 5s
       timeout: 10s
+
+  cliente:
+    # image: jgarcia423/python-orientdb-client
+    build: .
+    container_name: cliente
+    volumes:
+      - ./compartida:/files/export-orientdb
+    depends_on:
+      orientdb:
+        condition: service_healthy
 
   apache:
     image: httpd:2.4-alpine
