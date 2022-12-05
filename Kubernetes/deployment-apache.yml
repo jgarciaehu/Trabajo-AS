@@ -2,29 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: cliente
+  name: apache
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      componente: cliente
+      componente: apache
 
   template:
     metadata:
       labels:
-        componente: cliente
+        componente: apache
 
       spec:
         volumes:
-          - name: volumen-cliente
+          - name: volumen-apache
             persistenVolumeClaim:
               claimName: reclamacion
 
         containers:
-          - name: cliente
-            image: jgarcia423/python-orientdb-client
+          - name: apache
+            image: httpd:2.4-alpine
+            ports:
+              - containerPort: 80
             volumeMounts:
-              - name: volumen-cliente
-                mountPath: /files/export-orientdb
+              - name: volumen-apache
+                mountPath: /usr/local/apache2/htdocs
                 subPath: compartida

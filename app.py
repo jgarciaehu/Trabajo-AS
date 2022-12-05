@@ -1,3 +1,4 @@
+import time
 import pyorient
 from datetime import datetime
 

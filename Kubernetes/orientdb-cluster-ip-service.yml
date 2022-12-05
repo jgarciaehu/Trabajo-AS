@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: orientdb
+
+spec:
+  type: ClusterIP
+
+  selector:
+    componente: orientdb
+
+  ports:
+    - port: 2424
+      targetPort: 2424

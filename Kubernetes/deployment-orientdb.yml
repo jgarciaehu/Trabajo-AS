@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: deployment-orientdb
+  name: orientdb
 
 spec:
   replicas: 1
@@ -17,7 +17,7 @@ spec:
 
       spec:
         containers:
-          - name: contenedor-orientdb
+          - name: orientdb
             image: orientdb:3.0
             ports:
               - containerPort: 2424

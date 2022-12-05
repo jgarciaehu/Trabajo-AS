@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: volumen
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany

@@ -1,8 +1,8 @@
 services:
-  client:
-    #image: jgarcia423/python-orientdb-client
+  cliente:
+    # image: jgarcia423/python-orientdb-client
     build: .
-    container_name: client
+    container_name: cliente
     volumes:
       - ./compartida:/files/export-orientdb
     depends_on:
