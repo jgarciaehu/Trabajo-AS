@@ -14,8 +14,7 @@ services:
       timeout: 10s
 
   cliente:
-    # image: jgarcia423/python-orientdb-client
-    build: .
+    image: jgarcia423/python-orientdb-client
     container_name: cliente
     volumes:
       - ./compartida:/files/export-orientdb
@@ -31,8 +30,7 @@ services:
     volumes:
       - ./compartida:/usr/local/apache2/htdocs
     depends_on:
-      orientdb:
-        condition: service_healthy
+      - cliente
 
 volumes:
   compartida:
