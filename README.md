@@ -1,5 +1,7 @@
 # Trabajo-AS
 
+_Autor: Jon García Beaskoetxea_
+
 El objetivo principal de este trabajo era poner en práctica los conocimientos teóricos adquiridos durante la asignatura sobre técnicas de gestión y orquestración de contenedores.
 
 En este documento se busca dar instrucciones a comandos relevantes dentro del trabajo. Se recomienda también revisar la documentación, ya que esta contiene puntualizaciones relevantes.
