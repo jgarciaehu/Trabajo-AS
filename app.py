@@ -40,23 +40,41 @@ else:
         exit
 
 
-CLASS_NAME = "miClase"
-print(f"Crear Clase '{CLASS_NAME}'.")
-client.command(f"CREATE CLASS {CLASS_NAME}")
+# CLASS_NAME = "miClase"
+# print(f"Crear Clase '{CLASS_NAME}'.")
+# client.command(f"CREATE CLASS {CLASS_NAME}")
 
-print("Insertar elementos en Clase creada.")
-client.command(f'INSERT INTO {CLASS_NAME} SET item="OrientDB", version="3.0"')
-client.command(f'INSERT INTO {CLASS_NAME} SET item="pyorient", version="1.5.1"')
-client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpine"')
+# print("Insertar elementos en Clase creada.")
+# client.command(f'INSERT INTO {CLASS_NAME} SET item="OrientDB", version="3.0"')
+# client.command(f'INSERT INTO {CLASS_NAME} SET item="pyorient", version="1.5.1"')
+# client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpine"')
 
-print("Exportar los elementos insertados a la BD.")
-list_miClase = client.command(f"SELECT * FROM {CLASS_NAME}")
-fecha = datetime.now().strftime("%d-%m")
 
-with open(f"/files/export-orientdb/export.txt", "w") as f:
+CLUSTER_NAME = "miCluster"
+print(f"Crear Cluster {CLUSTER_NAME}.")
+cluster_id = client.data_cluster_add(CLUSTER_NAME, pyorient.CLUSTER_TYPE_PHYSICAL)
 
-    for entrada in list_miClase:
-        f.write(f"Item: {entrada.item}, versión: {entrada.version}\n")
+# Es el ejemplo de la documentación
+print(" Introducir un registro en el cluster.")
+rec = {"@my_class": {"accommodation": "house", "work": "office", "holiday": "sea"}}
+rec_position = client.record_create(cluster_id, rec)
+
+client.command(f"DICTIONARY PUT ejemplo {cluster_id}:{rec_position}")
+
+get = client.command(f"DICTIONARY GET ejemplo")
+
+print(get)
+
+time.sleep(1000)
+
+# print("Exportar los elementos insertados a la BD.")
+# list_miClase = client.command(f"SELECT * FROM {CLASS_NAME}")
+# fecha = datetime.now().strftime("%d-%m")
+
+# with open(f"/files/export-orientdb/export.txt", "w") as f:
+
+#     for entrada in list_miClase:
+#         f.write(f"Item: {entrada.item}, versión: {entrada.version}\n")
 
 # Cerrar la conexion
 # client.shutdown(DB_USER, DB_PWD)
