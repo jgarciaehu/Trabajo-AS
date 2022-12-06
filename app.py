@@ -3,7 +3,7 @@ import pyorient
 HOST = "orientdb"
 PORT = 2424
 DATABASE_NAME = "pythonDB"
-DB_USER = "root"  # !!! Pendiente crear otro usuario
+DB_USER = "root"
 DB_PWD = "root_passwd"
 
 try:
@@ -58,5 +58,4 @@ with open(f"/files/export-orientdb/export.txt", "w") as f:
         print(f"    Item: {entrada.item}, version: {entrada.version}")
         f.write(f"Item: {entrada.item}, version: {entrada.version}\n")
 
-# Cerrar la conexion
-# client.shutdown(DB_USER, DB_PWD)
+print("-> El script ha finalizado :D")
