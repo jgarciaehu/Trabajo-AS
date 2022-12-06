@@ -1,6 +1,4 @@
-import time
 import pyorient
-from datetime import datetime
 
 HOST = "orientdb"
 PORT = 2424
@@ -51,7 +49,6 @@ client.command(f'INSERT INTO {CLASS_NAME} SET item="python", version="3.11-alpin
 
 print("Exportar los elementos insertados a la BD.")
 list_miClase = client.command(f"SELECT * FROM {CLASS_NAME}")
-fecha = datetime.now().strftime("%d-%m")
 
 with open(f"/files/export-orientdb/export.txt", "w") as f:
 
